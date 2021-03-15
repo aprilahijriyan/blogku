@@ -38,7 +38,7 @@ module.exports = function (/* ctx */) {
       // 'line-awesome',
       // 'roboto-font-latin-ext', // this or either 'roboto-font', NEVER both!
 
-      'roboto-font', // optional, you are not bound to it
+      // 'roboto-font', // optional, you are not bound to it
       'material-icons', // optional, you are not bound to it
     ],
 
@@ -64,7 +64,7 @@ module.exports = function (/* ctx */) {
 
       // https://quasar.dev/quasar-cli/handling-webpack
       extendWebpack (cfg) {
-cfg.module.rules.push({
+      cfg.module.rules.push({
           enforce: 'pre',
           test: /\.(js|vue)$/,
           loader: 'eslint-loader',
@@ -184,6 +184,12 @@ cfg.module.rules.push({
         // https://www.electron.build/configuration/configuration
 
         appId: 'com.blogku.app',
+        mac: {
+          target: ["dmg", "pkg"]
+        },
+        win: {
+          target: ["nsis", "msi", "appx"]
+        },
         linux: {
           target: ["deb", "snap", "rpm"]
         }
