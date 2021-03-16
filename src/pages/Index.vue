@@ -32,8 +32,24 @@
             </q-chip>
             <q-chip outline clickable @click="onClick" class="text-bold text-capitalize">lihat semua</q-chip>
           </div>
-          <q-list separator bordered class="q-mt-md">
-              <artikel v-for="i in 5" :key="i" />
+          <q-list separator bordered class="scroll q-mt-md hide-scrollbar" ref="scrollTargetRef" style="max-height: 700px">
+              <q-infinite-scroll ref="infScroll" @load="onLoadMenu" :offset="700" :scroll-target="scrollTarget">
+                <artikel v-for="(item, idx) in articles" :key="idx" />
+                <template v-slot:loading>
+                  <div class="text-center q-my-md">
+                    <q-spinner-dots color="primary" size="40px" />
+                  </div>
+                </template>
+              </q-infinite-scroll>
+              <q-banner v-if="error_occured" rounded dense class="bg-grey text-white text-bold text-capitalize">
+                <template v-slot:avatar>
+                  <q-icon name="error" color="red" />
+                </template>
+                <div style="font-size: 16px">Maaf kami tidak bisa mendapatkan artikel :(</div> 
+                <template v-slot:action>
+                  <q-btn flat color="white" label="Reload?" @click="reloadArticle" />
+                </template>
+              </q-banner>
             </q-list>
           <div class="lt-md q-mb-lg"></div>
         </div>
@@ -66,12 +82,39 @@ export default {
   data() {
     return {
       slide: 1,
-      text: ""
+      text: "",
+      scrollTarget: void 0,
+      articles: [],
+      error_occured: false,
+      counter: 0
     }
   },
   methods: {
     onClick() {
       console.log("chip clicked")
+    },
+    onLoadMenu (index, done) {
+      this.error_occured = false
+      if (index > 1) {
+        setTimeout(() => {
+          if (this.counter == 5) {
+            this.error_occured = true
+            done(true)
+            return
+          }
+          this.articles.push({}, {}, {}, {}, {}, {}, {})
+          done()
+        }, 1000)
+      }
+      else {
+        setTimeout(() => {
+          done()
+        }, 200)
+      }
+      this.counter += 1
+    },
+    reloadArticle() {
+      this.$refs.infScroll.resume();
     }
   }
 }
