@@ -32,8 +32,8 @@
             </q-chip>
             <q-chip outline clickable @click="onClick" class="text-bold text-capitalize">lihat semua</q-chip>
           </div>
-          <q-list class="scroll q-mt-md hide-scrollbar" ref="scrollTargetRef" style="max-height: 700px">
-              <q-infinite-scroll ref="infScroll" @load="onLoadMenu" :offset="700" :scroll-target="scrollTarget">
+          <q-list class="scroll q-mt-md hide-scrollbar" ref="scrollTargetRef" style="max-height: 790px">
+              <q-infinite-scroll ref="infScroll" @load="onLoadMenu" :offset="790" :scroll-target="scrollTarget">
                 <artikel v-for="(item, idx) in articles" :key="idx" />
                 <template v-slot:loading>
                   <div class="text-center q-my-md">
@@ -47,7 +47,7 @@
                 </template>
                 <div style="font-size: 16px">Maaf kami tidak bisa mendapatkan artikel :(</div> 
                 <template v-slot:action>
-                  <q-btn flat color="white" label="Reload?" @click="reloadArticle" />
+                  <q-btn class="text-bold" flat color="white" label="Reload?" @click="reloadArticle" />
                 </template>
               </q-banner>
             </q-list>
@@ -57,17 +57,28 @@
           <div class="q-mr-sm"></div>
         </div>
         <div class="col-md-4 gt-sm">
-          <q-card>
+          <q-card class="q-mb-md">
             <q-card-section>
               <div class="flex justify-between">
                 <div class="text-h5">Populer</div>
                 <a href="#" class="text-bold no-underline text-blue" @click.prevent="onClick">Lihat semua</a>
               </div>
             </q-card-section>
-            <q-list separator bordered >
+            <q-list separator bordered>
               <artikel v-for="i in 5" :key="i" :isPopuler="true"/>
             </q-list>
           </q-card>
+          <div class="row q-gutter-sm">
+            <q-input outlined v-model="text" label="Masukan email kamu..." class="col">
+              <template v-slot:prepend>
+                <q-icon name="email" />
+              </template>
+              <template v-slot:append v-if="text">
+                <q-icon name="close" @click="text = ''" class="cursor-pointer" />
+              </template>
+            </q-input>
+            <q-btn color="red" label="Subscribe"/>
+          </div>
         </div>
       </div>
     </div>
