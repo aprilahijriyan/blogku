@@ -12,7 +12,7 @@
       <q-carousel-slide :name="3" img-src="https://cdn.quasar.dev/img/parallax2.jpg" />
       <q-carousel-slide :name="4" img-src="https://cdn.quasar.dev/img/quasar.jpg" />
     </q-carousel>
-    <div class="q-pa-md q-gutter-md">
+    <div class="q-pa-md">
       <div class="row flex justify-between">
         <div class="col-md">
           <div class="row q-gutter-sm">
@@ -26,13 +26,13 @@
             </q-input>
             <q-btn icon="filter_list"/>
           </div>
-          <div class="flex q-gutter-sm q-mt-sm text-capitalize">
+          <div class="flex q-mt-sm text-capitalize">
             <q-chip v-for="i in ($q.platform.is.desktop ? 8 : 3)" :key="i" clickable @click="onClick" text-color="white" color="primary" icon="label">
               tag
             </q-chip>
             <q-chip outline clickable @click="onClick" class="text-bold text-capitalize">lihat semua</q-chip>
           </div>
-          <q-list separator bordered class="scroll q-mt-md hide-scrollbar" ref="scrollTargetRef" style="max-height: 700px">
+          <q-list class="scroll q-mt-md hide-scrollbar" ref="scrollTargetRef" style="max-height: 700px">
               <q-infinite-scroll ref="infScroll" @load="onLoadMenu" :offset="700" :scroll-target="scrollTarget">
                 <artikel v-for="(item, idx) in articles" :key="idx" />
                 <template v-slot:loading>
@@ -69,6 +69,16 @@
             </q-list>
           </q-card>
         </div>
+      </div>
+    </div>
+    <div class="column bg-dark text-white text-bold">
+      <div class="flex items-center justify-center q-mt-md q-gutter-md">
+        <q-btn round color="primary" icon="lab la-github" />
+        <q-btn round color="primary" icon="lab la-facebook-f" />
+        <q-btn round color="primary" icon="lab la-linkedin-in" />
+      </div>
+      <div class="flex items-center justify-center q-mt-md">
+        <p>Copyright (c) Aprila Hijriyan. All right reserved</p>
       </div>
     </div>
   </q-page>
