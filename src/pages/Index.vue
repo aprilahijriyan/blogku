@@ -56,7 +56,7 @@
         <div class="gt-sm">
           <div class="q-mr-sm"></div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 gt-sm">
           <q-card>
             <q-card-section>
               <div class="flex justify-between">
