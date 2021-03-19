@@ -2,15 +2,17 @@
   <q-page>
     <q-carousel
       animated
+      swipeable
+      :padding="true"
       v-model="slide"
+      control-type="unelevated"
+      control-color="primary"
       arrows
-      navigation
       infinite
     >
-      <q-carousel-slide :name="1" img-src="https://cdn.quasar.dev/img/mountains.jpg" />
-      <q-carousel-slide :name="2" img-src="https://cdn.quasar.dev/img/parallax1.jpg" />
-      <q-carousel-slide :name="3" img-src="https://cdn.quasar.dev/img/parallax2.jpg" />
-      <q-carousel-slide :name="4" img-src="https://cdn.quasar.dev/img/quasar.jpg" />
+      <q-carousel-slide v-for="i in 5" :key="i" :name="i">
+        <artikel-terbaru />
+      </q-carousel-slide>
     </q-carousel>
     <div class="q-pa-md">
       <div class="row flex justify-between">
@@ -97,8 +99,9 @@
 
 <script>
 import Artikel from 'src/components/Artikel.vue'
+import ArtikelTerbaru from 'src/components/ArtikelTerbaru.vue'
 export default {
-  components: { Artikel },
+  components: { Artikel, ArtikelTerbaru },
   name: 'PageIndex',
   data() {
     return {
