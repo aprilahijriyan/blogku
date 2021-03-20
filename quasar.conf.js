@@ -35,10 +35,10 @@ module.exports = function (/* ctx */) {
       // 'fontawesome-v5',
       // 'eva-icons',
       // 'themify',
-      // 'line-awesome',
+      'line-awesome',
       // 'roboto-font-latin-ext', // this or either 'roboto-font', NEVER both!
 
-      'roboto-font', // optional, you are not bound to it
+      // 'roboto-font', // optional, you are not bound to it
       'material-icons', // optional, you are not bound to it
     ],
 
@@ -64,7 +64,7 @@ module.exports = function (/* ctx */) {
 
       // https://quasar.dev/quasar-cli/handling-webpack
       extendWebpack (cfg) {
-cfg.module.rules.push({
+      cfg.module.rules.push({
           enforce: 'pre',
           test: /\.(js|vue)$/,
           loader: 'eslint-loader',
@@ -165,7 +165,7 @@ cfg.module.rules.push({
 
     // Full list of options: https://quasar.dev/quasar-cli/developing-electron-apps/configuring-electron
     electron: {
-      bundler: 'packager', // 'packager' or 'builder'
+      bundler: 'builder', // 'packager' or 'builder'
 
       packager: {
         // https://github.com/electron-userland/electron-packager/blob/master/docs/api.md#options
@@ -183,7 +183,16 @@ cfg.module.rules.push({
       builder: {
         // https://www.electron.build/configuration/configuration
 
-        appId: 'blogku'
+        appId: 'com.blogku.app',
+        mac: {
+          target: ["dmg", "pkg"]
+        },
+        win: {
+          target: ["nsis", "msi", "appx"]
+        },
+        linux: {
+          target: ["deb", "snap", "rpm"]
+        }
       },
 
       // More info: https://quasar.dev/quasar-cli/developing-electron-apps/node-integration
