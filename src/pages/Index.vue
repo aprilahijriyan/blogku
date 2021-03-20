@@ -30,7 +30,7 @@
           </div>
           <q-list class="q-mt-md q-gutter-sm">
               <artikel v-for="(item, idx) in articles" :key="idx" />
-              <div class="flex justify-center">
+              <div class="flex items-center justify-center">
                 <q-pagination
                 v-model="current"
                 :max="5"
