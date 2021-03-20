@@ -28,47 +28,62 @@
             </q-input>
             <q-btn icon="filter_list"/>
           </div>
-          <div class="flex q-mt-sm text-capitalize">
-            <q-chip v-for="i in ($q.platform.is.desktop ? 8 : 3)" :key="i" clickable @click="onClick" text-color="white" color="primary" icon="label">
-              tag
-            </q-chip>
-            <q-chip outline clickable @click="onClick" class="text-bold text-capitalize">lihat semua</q-chip>
-          </div>
-          <q-list class="scroll q-mt-md hide-scrollbar" ref="scrollTargetRef" style="max-height: 790px">
-              <q-infinite-scroll ref="infScroll" @load="onLoadMenu" :offset="790" :scroll-target="scrollTarget">
-                <artikel v-for="(item, idx) in articles" :key="idx" />
-                <template v-slot:loading>
-                  <div class="text-center q-my-md">
-                    <q-spinner-dots color="primary" size="40px" />
-                  </div>
-                </template>
-              </q-infinite-scroll>
-              <q-banner v-if="error_occured" rounded dense class="bg-grey text-white text-bold text-capitalize">
-                <template v-slot:avatar>
-                  <q-icon name="error" color="red" />
-                </template>
-                <div style="font-size: 16px">Maaf kami tidak bisa mendapatkan artikel :(</div> 
-                <template v-slot:action>
-                  <q-btn class="text-bold" flat color="white" label="Reload?" @click="reloadArticle" />
-                </template>
-              </q-banner>
-            </q-list>
+          <q-list class="q-mt-md q-gutter-sm">
+              <artikel v-for="(item, idx) in articles" :key="idx" />
+              <div class="flex justify-center">
+                <q-pagination
+                v-model="current"
+                :max="5"
+                direction-links
+                push
+                color="teal"
+              />
+              </div>
+          </q-list>
           <div class="lt-md q-mb-lg"></div>
         </div>
         <div class="gt-sm">
           <div class="q-mr-sm"></div>
         </div>
-        <div class="col-md-4 gt-sm">
-          <q-card class="q-mb-md">
+        <div class="col-md-4 gt-sm q-gutter-md">
+          <q-card>
             <q-card-section>
               <div class="flex justify-between">
                 <div class="text-h5">Populer</div>
-                <a href="#" class="text-bold no-underline text-blue" @click.prevent="onClick">Lihat semua</a>
+                <a href="#" class="text-bold no-underline text-blue text-capitalize" @click.prevent="onClick">Lihat semua</a>
               </div>
             </q-card-section>
             <q-list separator bordered>
               <artikel v-for="i in 5" :key="i" :isPopuler="true"/>
             </q-list>
+          </q-card>
+          <q-card>
+            <q-card-section>
+              <div class="flex justify-between">
+                <div class="text-h5">Tags</div>
+                <a href="#" class="text-bold no-underline text-blue text-capitalize" @click.prevent="onClick">Lihat semua</a>
+              </div>
+            </q-card-section>
+            <q-separator inset />
+            <div class="flex justify-center text-capitalize q-pa-sm">
+              <q-chip v-for="i in ($q.platform.is.desktop ? 8 : 3)" :key="i" clickable @click="onClick" text-color="white" color="primary" icon="label">
+                tag
+              </q-chip>
+            </div>
+          </q-card>
+          <q-card>
+            <q-card-section>
+              <div class="text-h5">
+                Contact
+              </div>
+            </q-card-section>
+            <q-card-section>
+              <q-input outlined v-model="text" label="Subject" />
+              <q-input
+                v-model="text"
+                type="textarea"
+              />
+            </q-card-section>
           </q-card>
           <div class="row q-gutter-sm">
             <q-input outlined v-model="text" label="Masukan email kamu..." class="col">
@@ -108,37 +123,15 @@ export default {
       slide: 1,
       text: "",
       scrollTarget: void 0,
-      articles: [],
+      articles: [...Array(5)],
       error_occured: false,
-      counter: 0
+      counter: 0,
+      current: 1
     }
   },
   methods: {
     onClick() {
       console.log("chip clicked")
-    },
-    onLoadMenu (index, done) {
-      this.error_occured = false
-      if (index > 1) {
-        setTimeout(() => {
-          if (this.counter == 5) {
-            this.error_occured = true
-            done(true)
-            return
-          }
-          this.articles.push({}, {}, {}, {}, {}, {}, {})
-          done()
-        }, 1000)
-      }
-      else {
-        setTimeout(() => {
-          done()
-        }, 200)
-      }
-      this.counter += 1
-    },
-    reloadArticle() {
-      this.$refs.infScroll.resume();
     }
   }
 }
