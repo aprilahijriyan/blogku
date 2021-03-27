@@ -42,7 +42,21 @@ const routes = [
       { path: '', component: () => import('pages/PasswordReset.vue') }
     ]
   },
-
+  {
+    path: '/@:name',
+    component: () => import('layouts/BlankLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/UserProfile.vue') },
+      { path: '/:slug', component: () => import('pages/BacaArtikel.vue') }
+    ]
+  },
+  {
+    path: '/@:name/:slug',
+    component: () => import('layouts/BlankLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/BacaArtikel.vue') }
+    ]
+  },
   // Always leave this as last one,
   // but you can also remove it
   {
