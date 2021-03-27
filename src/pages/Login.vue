@@ -48,6 +48,13 @@ export default {
         }
       )
       console.log("success: " + success)
+      if (!success) {
+        this.$q.notify({
+          icon: "error",
+          message: "Invalid email or password"
+        })
+      }
+      this.$router.push('/dashboard')
     }
   }
 }
