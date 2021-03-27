@@ -13,7 +13,7 @@
             <q-item-label :class="'text-bold text-capitalize ' + ($q.platform.is.desktop ? 'ellipsis' : '')" :style="'font-size: ' + (isPopuler ? '16px' : '22px')">Membuat REST API dengan zemfrog framework!</q-item-label>
           </q-item-section>
         </div>
-        <q-item-label caption :lines="isPopuler ? 2 : 5" :style="isPopuler ? '': 'font-size: 16px'">
+        <q-item-label caption :lines="isPopuler ? 2 : 4" :style="isPopuler ? '': 'font-size: 16px'">
           <div class="row">
             <p>By <span class="text-weight-bold">Aprila Hijriyan - 5 min ago</span></p>
           </div>
