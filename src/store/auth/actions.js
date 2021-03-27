@@ -49,6 +49,22 @@ export async function register(context, payload) {
     return success
 }
 
+export async function forgot_password(context, {email}) {
+    var success = false
+    const data = new FormData()
+    data.append('username', email)
+    try {
+        await this.$axios.post(
+            '/auth/jwt/forgot-password',
+            data
+        )
+        success = true
+    } catch (error) {
+        console.log("error forgot password " + error)
+    }
+    return success
+}
+
 export function logout({commit}) {
     commit('setToken', '')
     commit('setUser', {})
