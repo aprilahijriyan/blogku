@@ -6,8 +6,8 @@
           Blog Ku
         </q-toolbar-title>
 
-        <q-btn outline label="Masuk" class="q-mr-md"/>
-        <q-btn color="primary" label="Daftar" />
+        <q-btn to="/login" outline label="Masuk" class="q-mr-md"/>
+        <q-btn to="/register" color="primary" label="Daftar" />
       </q-toolbar>
     </q-header>
     <q-page-container>
