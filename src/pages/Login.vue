@@ -1,7 +1,7 @@
 <template>
   <q-page padding class="window-height window-width row justify-center items-center">
     <!-- content -->
-    <form @submit="onSubmit">
+    <form @submit.prevent="onSubmit">
       <div class="q-gutter-md" style="width: 350px;">
       <div class="column q-gutter-md q-pa-md shadow-10 bg-white" style="border-radius: 5px">
         <q-input type="email" v-model="email" label="Email">
@@ -53,8 +53,9 @@ export default {
           icon: "error",
           message: "Invalid email or password"
         })
+      } else {
+        this.$router.push('/dashboard', () => {})
       }
-      this.$router.push('/dashboard')
     }
   }
 }

@@ -43,6 +43,13 @@ const routes = [
     ]
   },
   {
+    path: '/dashboard',
+    component: () => import('layouts/DashboardLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/dashboard/Index.vue') }
+    ]
+  },
+  {
     path: '/@:name',
     component: () => import('layouts/BlankLayout.vue'),
     children: [

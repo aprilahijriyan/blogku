@@ -1,7 +1,7 @@
 <template>
   <q-item clickable v-ripple @click="onArticleClick">
     <div class="row">
-      <div :class="'col-md-' + (isPopuler ? 5 : 4)">
+      <div :class="'col-md-' + (isPopuler ? 6 : 4)">
         <q-item-section thumbnail>
           <img style="border-radius: 8px" class="fit" src="https://cdn.quasar.dev/img/mountains.jpg">
         </q-item-section>

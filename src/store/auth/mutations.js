@@ -7,8 +7,10 @@ import {LocalStorage} from 'quasar'
 
 export function setToken(state, token) {
     state.accessToken = token
+    state.isLoggedIn = token ? true : false
     LocalStorage.set('auth.token', token)
-    this.$axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
+    if (token.trim() !== '')
+        this.$axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
 }
 
 export function setUser(state, user) {
